@@ -1,0 +1,62 @@
+Customized [[https://github.com/facebook/zstd/tree/dev|Zstandard]] archive file format and its encryption/decryption library for small SVG icons. 
+
+Inspired by [[https://iconify.design/|iconify]], but customizied for self-hosting.
+
+Targetting faster decompression while using high compression ratio, by utilizing [[https://github.com/facebook/zstd/tree/dev?tab=readme-ov-file#the-case-for-small-data-compression|zstd dictionary]] and adding [[https://en.wikipedia.org/wiki/Binary_search|binary tree]] at the end of file.
+
+The key to find in tree is a [[https://docs.rs/rustc-hash/2.1.1/rustc_hash/struct.FxHasher.html#method.default|default fxHash]] of {{{[set_name]/[icon_name]}}}, without .svg at the trail.
+
+
+=== Procedure of preparing
+The shell script file {{{icons.sh}}} has this automated tasks.
+# git repositories of icon sets are minimally cloned under repos directory.
+# set of target svg files are copied under {{{icons}}} directory, so that it has all its files in form of {{{icons/[set_name]/[icon_name].svg}}}.
+
+=== Procedure of compressing
+# Every svg icons get its root svg tag stripped and replaced with part of viewBox before archiving.
+# train zstd dictionary to {{{icons/icons.zst.dict}}}
+# Every compressed files get its magic number and dictionary id stripped before saving for little more.
+
+=== Size comparison
+target icons packs : heroicons(outline), lucide, lucide-lab, material-symobls(outlined), mdi(outlined)
+* tar : 14M
+* tar of zst : 12M
+* tar.zst without dictionary : 1.2M
+* seekable zstd archive with 'zstd-framed' libary : 3.5M
+* magic number, dictionary id stripped, with 2K dictionary, compression ratio 19 : 1.8M
+** additional binary tree size for search : +96K (roughly 8byte per 1 icon file)
+
+=== Runtime comparison
+* bench system : AMD 9950X3D, Samsung NVME SSD 980 PRO 2TB
+
+{{{time tar xOf icons/icons.tar.zst lucide/database.svg}}}
+{{{real    0m0.007s
+user    0m0.009s
+sys     0m0.002s}}}
+
+
+{{{time target/release/vis-icons icons.ch.zst icons/icons.zst.dict lucide/database}}}
+{{{real    0m0.001s
+user    0m0.001s
+sys     0m0.000s}}}
+
+
+* bench system : over LAN, Odroid N2+
+
+using tar.zst without dictionary
+{{{time curl http://odroid-n2.local/icon/lucide/sun.svg}}}
+real    0m0.058s
+user    0m0.001s
+sys     0m0.001s
+
+using customized zst with dictionary and binary tree, without any preloading
+{{{time curl http://odroid-n2.local/icon/lucide/sun.svg}}}
+real    0m0.004s
+user    0m0.001s
+sys     0m0.001s
+
+using customized zst with dictionary and binary tree, preloading dictionary and decompressor context
+{{{time curl http://odroid-n2.local/icon/lucide/sun.svg}}}
+real    0m0.003s
+user    0m0.001s
+sys     0m0.001s

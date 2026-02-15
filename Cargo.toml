@@ -1,0 +1,13 @@
+[package]
+name = "zstd-4-icon"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+walkdir = "2"
+anyhow = "1.0"
+bitcode = { version = "0", features = ["serde"] }
+zstd-safe = {version = "7", features = ["std"] }
+rustc-hash = "2"
+cfg_log = "0.1"
+log = { version = "0.4", optional = true }
