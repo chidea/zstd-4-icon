@@ -38,7 +38,7 @@ sys     0m0.002s
 }}}
 
 
-{{{time target/release/vis-icons icons.ch.zst icons/icons.zst.dict lucide/database}}}
+{{{time target/release/zstd-4-icon icons.zst icons/icons.zst.dict lucide/database}}}
 
 {{{
 real    0m0.001s
