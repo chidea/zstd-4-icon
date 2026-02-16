@@ -4,12 +4,12 @@ Inspired by [[https://iconify.design/|iconify]], but customizied for self-hostin
 
 Targetting faster decompression while using high compression ratio, by utilizing [[https://github.com/facebook/zstd/tree/dev?tab=readme-ov-file#the-case-for-small-data-compression|zstd dictionary]] and adding [[https://en.wikipedia.org/wiki/Binary_search|binary tree]] at the end of file.
 
-The key to find in tree is a [[https://docs.rs/rustc-hash/2.1.1/rustc_hash/struct.FxHasher.html#method.default|default fxHash]] of {{{[set_name]/[icon_name]}}}, without .svg at the trail.
+The key to find in tree is a 32bit [[https://docs.rs/rustc-hash/2.1.1/rustc_hash/struct.FxHasher.html#method.default|default fxHash]] of {{{[set_name]/[icon_name]}}}, without .svg at the trail.
 
 
 === Procedure of preparing
 The shell script file {{{icons.sh}}} has this automated tasks.
-# git repositories of icon sets are minimally cloned under repos directory.
+# git repositories of icon sets are minimally cloned under {{{repos}}} directory.
 # set of target svg files are copied under {{{icons}}} directory, so that it has all its files in form of {{{icons/[set_name]/[icon_name].svg}}}.
 
 === Procedure of compressing
