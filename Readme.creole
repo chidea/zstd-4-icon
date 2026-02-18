@@ -29,18 +29,16 @@ target icons packs : heroicons(outline), lucide, lucide-lab, material-symobls(ou
 === Runtime comparison
 * bench system : AMD 9950X3D, Samsung NVME SSD 980 PRO 2TB
 
-{{{time tar xOf icons/icons.tar.zst lucide/database.svg}}}
-
 {{{
+time tar xOf icons/icons.tar.zst lucide/database.svg
 real    0m0.007s
 user    0m0.009s
 sys     0m0.002s
 }}}
 
 
-{{{time target/release/zstd-4-icon icons.zst icons/icons.zst.dict lucide/database}}}
-
 {{{
+time target/release/zstd-4-icon icons.zst icons/icons.zst.dict lucide/database
 real    0m0.001s
 user    0m0.001s
 sys     0m0.000s
@@ -50,27 +48,24 @@ sys     0m0.000s
 * bench system : over LAN, Odroid N2+
 
 using tar.zst without dictionary
-{{{time curl http://odroid-n2.local/icon/lucide/sun.svg}}}
-
 {{{
+time curl http://odroid-n2.local/icon/lucide/sun.svg
 real    0m0.058s
 user    0m0.001s
 sys     0m0.001s
 }}}
 
 using customized zst with dictionary and binary tree, without any preloading
-{{{time curl http://odroid-n2.local/icon/lucide/sun.svg}}}
-
 {{{
+time curl http://odroid-n2.local/icon/lucide/sun.svg
 real    0m0.004s
 user    0m0.001s
 sys     0m0.001s
 }}}
 
 using customized zst with dictionary and binary tree, preloading dictionary and decompressor context
-{{{time curl http://odroid-n2.local/icon/lucide/sun.svg}}}
-
 {{{
+time curl http://odroid-n2.local/icon/lucide/sun.svg
 real    0m0.003s
 user    0m0.001s
 sys     0m0.001s
