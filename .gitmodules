@@ -1,9 +1,1 @@
-[submodule "repos/lucide"]
-	path = repos/lucide
-	url = https://github.com/lucide-icons/lucide.git
-[submodule "repos/lucide-lab"]
-	path = repos/lucide-lab
-	url = https://github.com/lucide-icons/lucide-lab.git
-[submodule "repos/heroicons"]
-	path = repos/heroicons
-	url = https://github.com/tailwindlabs/heroicons
+
