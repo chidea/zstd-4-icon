@@ -1,8 +1,11 @@
 #!/bin/env sh
 
+mkdir repos
+mkdir icons
 cd repos
 
 mkdir ../icons/lucide
+mkdir lucide
 cd lucide
 git fetch
 git pull
@@ -10,6 +13,7 @@ cp ./icons/*.svg ../../icons/lucide/
 cd ..
 
 mkdir ../icons/lucide-lab
+mkdir lucide-lab
 cd lucide-lab
 git fetch
 git pull
@@ -17,6 +21,7 @@ cp ./icons/*.svg ../../icons/lucide-lab
 cd ..
 
 mkdir ../icons/heroicons
+mkdir heroicons
 cd heroicons
 git init
 git remote add origin https://github.com/tailwindlabs/heroicons
