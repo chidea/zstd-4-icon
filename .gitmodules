@@ -1,1 +1,16 @@
 
+[submodule "repos/lucide"]
+	path = repos/lucide
+	url = https://github.com/lucide-icons/lucide.git
+[submodule "repos/lucide-lab"]
+	path = repos/lucide-lab
+	url = https://github.com/lucide-icons/lucide-lab.git
+[submodule "repos/heroicons"]
+	path = repos/heroicons
+	url = https://github.com/tailwindlabs/heroicons.git
+[submodule "repos/mdi"]
+	path = repos/mdi
+	url = https://github.com/marella/material-design-icons.git
+[submodule "repos/material-symbols"]
+	path = repos/material-symbols
+	url = https://github.com/marella/material-symbols.git
